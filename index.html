@@ -17,7 +17,7 @@
     <h2>Witold Gombrowicz</h2>
     <h3>prevedla: Katarina Šalamun-Biedrzycka</h3>
     <h4>prebral: Rok Klančar</h4>
-    <audio id="audio-player" controls src="media/uvod.mp3"></audio>
+    <span id="track-listened"></span><audio id="audio-player" controls src="media/uvod.mp3"></audio><span id="track-left"></span>
     <br>
     <button id="back-10-sec">Prevrti 10 sekund</button>
     <button id="forward-10-sec">Preskoči 10 sekund</button>
@@ -54,6 +54,9 @@
 
     <script>
         const audioPlayer = document.getElementById("audio-player");
+
+        const trackListened = document.getElementById("track-listened");
+        const trackLeft = document.getElementById("track-left");
 
         const chapters = [
             "media/uvod.mp3",
@@ -160,12 +163,27 @@
             audioPlayer.currentTime += 10;
         });
 
-        // Store playhead position
+        // Store playhead position && update time listened and time left text
 
         audioPlayer.addEventListener("timeupdate", (e) => {
-            localStorage.setItem("playhead-position", audioPlayer.currentTime);
+            const currentTime = audioPlayer.currentTime.toFixed(0);
+            localStorage.setItem("playhead-position", currentTime);
             localStorage.setItem("chapter-source", audioPlayer.getAttribute("src"));
+            trackListened.textContent = sToTime(currentTime);
+            trackLeft.textContent = sToTime(audioPlayer.duration - currentTime);
         });
+
+        // Helper methods seconds to hour:min:sec
+
+        function sToTime(t) {
+            return padZero(parseInt((t / (60 * 60)) % 24)) + ":" +
+                    padZero(parseInt((t / (60)) % 60)) + ":" + 
+                    padZero(parseInt((t) % 60));
+            }
+
+        function padZero(v) {
+            return (v < 10) ? "0" + v : v;
+        }
 
         // Chapters
 
