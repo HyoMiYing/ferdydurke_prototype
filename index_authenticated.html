@@ -63,10 +63,12 @@
         var wavesurfer = WaveSurfer.create({
             container: '#waveform',
             waveColor: 'violet',
-            progressColor: 'purple'
+            progressColor: 'purple',
+            backend: 'MediaElementWebAudio',
+            mediaControls: true
         });
 
-        wavesurfer.load('media/uvod.mp3');
+        wavesurfer.load('media/prvo_poglavje.mp3');
 
         // UI elements
         const audioPlayer = document.getElementById("audio-player");
