@@ -13,10 +13,15 @@
     <h2>Witold Gombrowicz</h2>
     <h3>prevedla: Katarina Šalamun-Biedrzycka</h3>
     <h4>prebral: Rok Klančar</h4>
-    <audio id="audio-player" controls src="media/uvod.mp3"></audio>
+    <span id="track-listened"></span><audio id="audio-player" controls src="media/uvod.mp3"></audio><span id="track-left"></span>
     <br>
     <button id="back-10-sec">Prevrti 10 sekund</button>
     <button id="forward-10-sec">Preskoči 10 sekund</button>
+    <button id="add-bookmark">Dodaj zaznamek</button>
+    <br>
+    <h5>Zaznamki</h5>
+    <ul id="bookmarks">
+    </ul>
     <br>
     <h4>Hitrost predvajanja</h4>
     <ul>
@@ -49,7 +54,11 @@
     </ul>
 
     <script>
+
         const audioPlayer = document.getElementById("audio-player");
+
+        const trackListened = document.getElementById("track-listened");
+        const trackLeft = document.getElementById("track-left");
 
         const chapters = [
             "media/uvod.mp3",
@@ -69,8 +78,29 @@
             "media/stirinajsto_poglavje.mp3",
         ];
 
+        const chapterSourcesAndNames = {
+            "media/uvod.mp3" : "UVOD",
+            "media/prvo_poglavje.mp3" : "1. POGLAVJE",
+            "media/drugo_poglavje.mp3" : "2. POGLAVJE",
+            "media/tretje_poglavje.mp3" : "3. POGLAVJE",
+            "media/cetrto_poglavje.mp3" : "4. POGLAVJE",
+            "media/peto_poglavje.mp3" : "5. POGLAVJE",
+            "media/sesto_poglavje.mp3" : "6. POGLAVJE",
+            "media/sedmo_poglavje.mp3" : "7. POGLAVJE",
+            "media/osmo_poglavje.mp3" : "8. POGLAVJE",
+            "media/deveto_poglavje.mp3" : "9. POGLAVJE",
+            "media/deseto_poglavje.mp3" : "10. POGLAVJE",
+            "media/enajsto_poglavje.mp3" : "11. POGLAVJE",
+            "media/dvanajsto_poglavje.mp3" : "12. POGLAVJE",
+            "media/trinajsto_poglavje.mp3" : "13. POGLAVJE",
+            "media/stirinajsto_poglavje.mp3" : "14. POGLAVJE",
+        }
+
         const back10Sec = document.getElementById("back-10-sec");
         const forward10Sec = document.getElementById("forward-10-sec");
+        
+        const addBookmark = document.getElementById("add-bookmark");
+        const bookmarks = document.getElementById("bookmarks");
 
         const x05 = document.getElementById("x0.5");
         const x075 = document.getElementById("x0.75");
@@ -102,6 +132,42 @@
                 audioPlayer.src = localStorage.getItem("chapter-source");
             }
         });
+
+        // Add bookmark
+        addBookmark.addEventListener("click", () => {
+            let newBookmark = document.createElement("li");
+            let bookmarkInfo = document.createElement("span");
+            let deleteBookmark = document.createElement("span")
+            newBookmark.classList.add("bookmark");
+            newBookmark.setAttribute("data-bookmark-time", audioPlayer.currentTime);
+            newBookmark.setAttribute("data-bookmark-chapter", audioPlayer.getAttribute("src"));
+            bookmarkInfo.textContent = chapterSourcesAndNames[audioPlayer.getAttribute("src")] + " " + sToTime(audioPlayer.currentTime) + "  ";
+            deleteBookmark.classList.add("delete-bookmark");
+            deleteBookmark.textContent = "🗑";
+            newBookmark.appendChild(bookmarkInfo);
+            newBookmark.appendChild(deleteBookmark);
+            bookmarks.appendChild(newBookmark);
+        });
+
+        // Play bookmark OR delete a bookmark
+        bookmarks.addEventListener("click", (e) => {
+            if (e.target.classList.contains("bookmark") || e.target.parentElement.classList.contains("bookmark")) {
+                if (e.target.classList.contains("delete-bookmark")) {
+                    e.target.parentElement.remove();
+                    return;
+                }
+                if (e.target.getAttribute("data-bookmark-chapter") == null) {
+                    audioPlayer.src = e.target.parentElement.getAttribute("data-bookmark-chapter");
+                    audioPlayer.currentTime = e.target.parentElement.getAttribute("data-bookmark-time");
+                    audioPlayer.play();
+                    return
+                }
+                audioPlayer.src = e.target.getAttribute("data-bookmark-chapter");
+                audioPlayer.currentTime = e.target.getAttribute("data-bookmark-time");
+                audioPlayer.play();
+            }
+        });
+
 
         // Play next chapter if current one ended
 
@@ -156,12 +222,27 @@
             audioPlayer.currentTime += 10;
         });
 
-        // Store playhead position
+        // Store playhead position && update time listened and time left text
 
         audioPlayer.addEventListener("timeupdate", (e) => {
-            localStorage.setItem("playhead-position", audioPlayer.currentTime);
+            const currentTime = audioPlayer.currentTime.toFixed(0);
+            localStorage.setItem("playhead-position", currentTime);
             localStorage.setItem("chapter-source", audioPlayer.getAttribute("src"));
+            trackListened.textContent = sToTime(currentTime);
+            trackLeft.textContent = sToTime(audioPlayer.duration - currentTime);
         });
+
+        // Helper methods seconds to hour:min:sec
+
+        function sToTime(t) {
+            return padZero(parseInt((t / (60 * 60)) % 24)) + ":" +
+                    padZero(parseInt((t / (60)) % 60)) + ":" + 
+                    padZero(parseInt((t) % 60));
+            }
+
+        function padZero(v) {
+            return (v < 10) ? "0" + v : v;
+        }
 
         // Chapters
 
