@@ -54,6 +54,24 @@
     <script>
         const audioPlayer = document.getElementById("audio-player");
 
+        const chapters = [
+            "media/uvod.mp3",
+            "media/prvo_poglavje.mp3",
+            "media/drugo_poglavje.mp3",
+            "media/tretje_poglavje.mp3",
+            "media/cetrto_poglavje.mp3",
+            "media/peto_poglavje.mp3",
+            "media/sesto_poglavje.mp3",
+            "media/sedmo_poglavje.mp3",
+            "media/osmo_poglavje.mp3",
+            "media/deveto_poglavje.mp3",
+            "media/deseto_poglavje.mp3",
+            "media/enajsto_poglavje.mp3",
+            "media/dvanajsto_poglavje.mp3",
+            "media/trinajsto_poglavje.mp3",
+            "media/stirinajsto_poglavje.mp3",
+        ];
+
         const back10Sec = document.getElementById("back-10-sec");
         const forward10Sec = document.getElementById("forward-10-sec");
 
@@ -85,6 +103,22 @@
             if (localStorage.getItem("playhead-position")) {
                 audioPlayer.fastSeek(localStorage.getItem("playhead-position"));
             }
+        });
+
+        // Play next chapter if current one ended
+        audioPlayer.addEventListener("ended", (e) => {
+            let currentSrc = audioPlayer.getAttribute("src");
+            let arrayPosition = chapters.indexOf(currentSrc);
+            if (arrayPosition == 14 || arrayPosition == -1) {
+                console.log("inside if");
+                console.log("array position:");
+                console.log(arrayPosition);
+                console.log(currentSrc);
+                return;
+            }
+            console.log("after if");
+            audioPlayer.src = chapters[arrayPosition + 1];
+            audioPlayer.play();
         });
 
 
@@ -137,19 +171,23 @@
         // Chapters
 
         intro.addEventListener("click", (e) => {
-            audioPlayer.setAttribute.src = "media/uvod.mp3";
+            audioPlayer.src = "media/uvod.mp3";
+            audioPlayer.play();
         });
 
         chapter1.addEventListener("click", (e) => {
-            audioPlayer.setAttribute.src = "media/prvo_poglavje.mp3";
+            audioPlayer.src = "media/prvo_poglavje.mp3";
+            audioPlayer.play();
         });
 
         chapter2.addEventListener("click", (e) => {
-            audioPlayer.setAttribute.src = "media/drugo_poglavje.mp3";
+            audioPlayer.src = "media/drugo_poglavje.mp3";
+            audioPlayer.play();
         });
 
         chapter3.addEventListener("click", (e) => {
-            audioPlayer.setAttribute.src = "media/tretje_poglavje.mp3";
+            audioPlayer.src = "media/tretje_poglavje.mp3";
+            audioPlayer.play();
         });
 
         chapter4.addEventListener("click", (e) => {
@@ -193,7 +231,8 @@
         });
 
         chapter14.addEventListener("click", (e) => {
-            audioPlayer.currentTime = 33430;
+            audioPlayer.src = "media/stirinajsto_poglavje.mp3";
+            audioPlayer.play();
         });
     </script>
 </body>
