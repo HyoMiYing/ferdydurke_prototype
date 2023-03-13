@@ -101,7 +101,8 @@
 
         document.addEventListener("DOMContentLoaded", (e) => {
             if (localStorage.getItem("playhead-position")) {
-                audioPlayer.fastSeek(localStorage.getItem("playhead-position"));
+                audioPlayer.currentTime = localStorage.getItem("playhead-position") - 5;
+                audioPlayer.src = localStorage.getItem("chapter-source");
             }
         });
 
@@ -113,7 +114,6 @@
             if (arrayPosition == 14 || arrayPosition == -1) {
                 return;
             }
-            console.log("after if");
             audioPlayer.src = chapters[arrayPosition + 1];
             audioPlayer.play();
         });
@@ -163,6 +163,7 @@
 
         audioPlayer.addEventListener("timeupdate", (e) => {
             localStorage.setItem("playhead-position", audioPlayer.currentTime);
+            localStorage.setItem("chapter-source", audioPlayer.getAttribute("src"));
         });
 
         // Chapters
