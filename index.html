@@ -34,20 +34,21 @@
     <br>
     <h4>Poglavja</h4>
     <ul>
-        <a id="chapter1">1. Poglavje: UGRABITEV</a>
-        <a id="chapter2">2. Poglavje: V JETNIŠTVU IN NADALJNEM MANJŠANJU</a>
-        <a id="chapter3">3. Poglavje: V MIŠNICI IN NADALJNEM MEČKANJU</a>
-        <a id="chapter4">4. Poglavje: PREDGOVOR K FILIDORJU S PODLAGO V OTROKU</a>
-        <a id="chapter5">5. Poglavje: FILIDOR, S PODLAGO V OTROKU</a>
-        <a id="chapter6">6. Poglavje: ZAPELJEVANJE, SILJENJE V MLADOST SE NADALJUJE</a>
-        <a id="chapter7">7. Poglavje: LJUBEZEN</a>
-        <a id="chapter8">8. Poglavje: KOMPOT</a>
-        <a id="chapter9">9. Poglavje: ZALEZOVANJE, TIPANJE V SODOBNOST SE NADALJUJE</a>
-        <a id="chapter10">10. Poglavje: ORGIJA STEGEN IN ZNOVA V MIŠNICI</a>
-        <a id="chapter11">11. Poglavje: PREDGOVOR K FILIBERTU, PODLOŽENEMU Z OTROKOM</a>
-        <a id="chapter12">12. Poglavje: FILIBERT, PODLOŽEN Z OTROKOM</a>
-        <a id="chapter13">13. Poglavje: HLAPČIČ ALI NOVE NEVARNOSTI</a>
-        <a id="chapter14">14. Poglavje: ORGIJA FRISOV IN ZNOVA V MIŠNICI</a>
+        <li><a id="intro">UVOD</a></li>
+        <li><a id="chapter1">1. Poglavje: UGRABITEV</a></li>
+        <li><a id="chapter2">2. Poglavje: V JETNIŠTVU IN NADALJNEM MANJŠANJU</a></li>
+        <li><a id="chapter3">3. Poglavje: V MIŠNICI IN NADALJNEM MEČKANJU</a></li>
+        <li><a id="chapter4">4. Poglavje: PREDGOVOR K FILIDORJU S PODLAGO V OTROKU</a></li>
+        <li><a id="chapter5">5. Poglavje: FILIDOR, S PODLAGO V OTROKU</a></li>
+        <li><a id="chapter6">6. Poglavje: ZAPELJEVANJE, SILJENJE V MLADOST SE NADALJUJE</a></li>
+        <li><a id="chapter7">7. Poglavje: LJUBEZEN</a></li>
+        <li><a id="chapter8">8. Poglavje: KOMPOT</a></li>
+        <li><a id="chapter9">9. Poglavje: ZALEZOVANJE, TIPANJE V SODOBNOST SE NADALJUJE</a></li>
+        <li><a id="chapter10">10. Poglavje: ORGIJA STEGEN IN ZNOVA V MIŠNICI</a></li>
+        <li><a id="chapter11">11. Poglavje: PREDGOVOR K FILIBERTU, PODLOŽENEMU Z OTROKOM</a></li>
+        <li><a id="chapter12">12. Poglavje: FILIBERT, PODLOŽEN Z OTROKOM</a></li>
+        <li><a id="chapter13">13. Poglavje: HLAPČIČ ALI NOVE NEVARNOSTI</a></li>
+        <li><a id="chapter14">14. Poglavje: ORGIJA FRISOV IN ZNOVA V MIŠNICI</a></li>
     </ul>
 
     <script>
@@ -64,6 +65,7 @@
         const x175 = document.getElementById("x1.75");
         const x2 = document.getElementById("x2.0");
 
+        const intro = document.getElementById("intro");
         const chapter1 = document.getElementById("chapter1");
         const chapter2 = document.getElementById("chapter2");
         const chapter3 = document.getElementById("chapter3");
@@ -134,16 +136,20 @@
 
         // Chapters
 
+        intro.addEventListener("click", (e) => {
+            audioPlayer.setAttribute.src = "media/uvod.mp3";
+        });
+
         chapter1.addEventListener("click", (e) => {
-            audioPlayer.currentTime = 23;
+            audioPlayer.setAttribute.src = "media/prvo_poglavje.mp3";
         });
 
         chapter2.addEventListener("click", (e) => {
-            audioPlayer.currentTime = 2981;
+            audioPlayer.setAttribute.src = "media/drugo_poglavje.mp3";
         });
 
         chapter3.addEventListener("click", (e) => {
-            audioPlayer.currentTime = 6943;
+            audioPlayer.setAttribute.src = "media/tretje_poglavje.mp3";
         });
 
         chapter4.addEventListener("click", (e) => {
