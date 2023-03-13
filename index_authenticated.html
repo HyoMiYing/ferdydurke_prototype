@@ -16,6 +16,8 @@
     <p id="currently-playing">UVOD</p>
     <span id="track-listened"></span><audio id="audio-player" controls src="media/uvod.mp3"></audio><span id="track-left"></span>
     <br>
+    <div id="waveform"></div>
+    <br>
     <button id="back-10-sec">Prevrti 10 sekund</button>
     <button id="forward-10-sec">Preskoči 10 sekund</button>
     <button id="add-bookmark">Dodaj zaznamek</button>
@@ -54,8 +56,19 @@
         <li><a id="chapter14" href="#fake-id">14. Poglavje: ORGIJA FRISOV IN ZNOVA V MIŠNICI</a></li>
     </ul>
 
+    <script src="https://unpkg.com/wavesurfer.js"></script>
     <script>
 
+        // Waveplayer
+        var wavesurfer = WaveSurfer.create({
+            container: '#waveform',
+            waveColor: 'violet',
+            progressColor: 'purple'
+        });
+
+        wavesurfer.load('media/uvod.mp3');
+
+        // UI elements
         const audioPlayer = document.getElementById("audio-player");
 
         const currentlyPlaying = document.getElementById("currently-playing");
