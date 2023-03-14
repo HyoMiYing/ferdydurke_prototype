@@ -158,13 +158,14 @@
 
         // Add bookmark
         addBookmark.addEventListener("click", () => {
+            const bookmarkNote = window.prompt("Opomba za zaznamek:");
             let newBookmark = document.createElement("li");
             let bookmarkInfo = document.createElement("span");
             let deleteBookmark = document.createElement("span")
             newBookmark.classList.add("bookmark");
             newBookmark.setAttribute("data-bookmark-time", audioPlayer.currentTime);
             newBookmark.setAttribute("data-bookmark-chapter", audioPlayer.getAttribute("src"));
-            bookmarkInfo.textContent = chapterSourcesAndNames[audioPlayer.getAttribute("src")] + " " + sToTime(audioPlayer.currentTime) + "  ";
+            bookmarkInfo.textContent = chapterSourcesAndNames[audioPlayer.getAttribute("src")] + " " + sToTime(audioPlayer.currentTime) + ": " + bookmarkNote + "  ";
             deleteBookmark.classList.add("delete-bookmark");
             deleteBookmark.textContent = "🗑";
             newBookmark.appendChild(bookmarkInfo);
