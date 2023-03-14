@@ -160,6 +160,9 @@
         addBookmark.addEventListener("click", () => {
             audioPlayer.pause();
             const bookmarkNote = window.prompt("Opomba za zaznamek:");
+            if (bookmarkNote == null) {
+                return;
+            }
             audioPlayer.play();
             let newBookmark = document.createElement("li");
             let bookmarkInfo = document.createElement("span");
