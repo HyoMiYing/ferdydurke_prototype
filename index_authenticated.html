@@ -14,7 +14,7 @@
     <h3>prevedla: Katarina Šalamun-Biedrzycka</h3>
     <h4>prebral: Rok Klančar</h4>
     <p id="currently-playing">UVOD</p>
-    <span id="track-listened"></span><audio id="audio-player" controls src="media/uvod.mp3"></audio><span id="track-left"></span>
+    <span id="track-listened"></span><audio id="audio-player" controls src="https://samplelib.com/lib/preview/mp3/sample-15s.mp3"></audio><span id="track-left"></span>
     <br>
     <button id="back-10-sec">Prevrti 10 sekund</button>
     <button id="forward-10-sec">Preskoči 10 sekund</button>
@@ -64,9 +64,9 @@
         const trackLeft = document.getElementById("track-left");
 
         const chapters = [
-            "media/uvod.mp3",
-            "media/prvo_poglavje.mp3",
-            "media/drugo_poglavje.mp3",
+            "https://samplelib.com/lib/preview/mp3/sample-15s.mp3",
+            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3",
+            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3",
             "media/tretje_poglavje.mp3",
             "media/cetrto_poglavje.mp3",
             "media/peto_poglavje.mp3",
@@ -82,9 +82,9 @@
         ];
 
         const chapterSourcesAndNamesLong = {
-            "media/uvod.mp3" : "UVOD",
-            "media/prvo_poglavje.mp3" : "1. POGLAVJE: UGRABITEV",
-            "media/drugo_poglavje.mp3" : "2. POGLAVJE: V JETNIŠTVU IN NADALJNEM MANJŠANJU",
+            "https://samplelib.com/lib/preview/mp3/sample-15s.mp3" : "UVOD",
+            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3" : "1. POGLAVJE: UGRABITEV",
+            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3" : "2. POGLAVJE: V JETNIŠTVU IN NADALJNEM MANJŠANJU",
             "media/tretje_poglavje.mp3" : "3. POGLAVJE: V MIŠNICI IN NADALJNEM MEČKANJU",
             "media/cetrto_poglavje.mp3" : "4. POGLAVJE: PREDGOVOR K FILIDORJU S PODLAGO V OTROKU",
             "media/peto_poglavje.mp3" : "5. POGLAVJE: FILIDOR, S PODLAGO V OTROKU",
@@ -100,9 +100,9 @@
         }
 
         const chapterSourcesAndNames = {
-            "media/uvod.mp3" : "UVOD",
-            "media/prvo_poglavje.mp3" : "1. POGLAVJE",
-            "media/drugo_poglavje.mp3" : "2. POGLAVJE",
+            "https://samplelib.com/lib/preview/mp3/sample-15s.mp3" : "UVOD",
+            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3" : "1. POGLAVJE",
+            "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3" : "2. POGLAVJE",
             "media/tretje_poglavje.mp3" : "3. POGLAVJE",
             "media/cetrto_poglavje.mp3" : "4. POGLAVJE",
             "media/peto_poglavje.mp3" : "5. POGLAVJE",
@@ -277,17 +277,17 @@
         // Chapters
 
         intro.addEventListener("click", (e) => {
-            audioPlayer.src = "media/uvod.mp3";
+            audioPlayer.src = "https://samplelib.com/lib/preview/mp3/sample-15s.mp3";
             audioPlayer.play();
         });
 
         chapter1.addEventListener("click", (e) => {
-            audioPlayer.src = "media/prvo_poglavje.mp3";
+            audioPlayer.src = "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3";
             audioPlayer.play();
         });
 
         chapter2.addEventListener("click", (e) => {
-            audioPlayer.src = "media/drugo_poglavje.mp3";
+            audioPlayer.src = "https://freetestdata.com/wp-content/uploads/2021/09/Free_Test_Data_5MB_MP3.mp3";
             audioPlayer.play();
         });
 
